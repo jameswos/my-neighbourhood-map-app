@@ -12,12 +12,6 @@ class App extends Component {
     places: ''
   }
 
-  mapUpdate(value) {
-    this.setState({
-      map: value
-    })
-  }
-
   componentDidMount() {
     this.loadPlaces();
   }
