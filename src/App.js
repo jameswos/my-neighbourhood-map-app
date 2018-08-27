@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Filter from './components/Filter';
+import List from './components/List';
 import Map from './components/Map';
 
 
