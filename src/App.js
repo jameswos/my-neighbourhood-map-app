@@ -9,7 +9,7 @@ import escapeRegExp from "escape-string-regexp"
 class App extends Component {
 
   state = {
-    places: ''
+    places: []
   }
 
   componentDidMount() {
