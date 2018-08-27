@@ -7,6 +7,14 @@ import axios from 'axios'
 
 class App extends Component {
 
+  state = {
+    places: []
+  }
+
+  componentDidMount() {
+    this.loadPlaces();
+  }
+
   loadPlaces = () => {
     const endPoint = "https://api.foursquare.com/v2/venues/explore?";
     const parameters = {
