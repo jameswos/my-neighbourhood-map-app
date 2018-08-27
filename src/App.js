@@ -3,12 +3,19 @@ import Filter from './components/Filter'
 import List from './components/List'
 import Map from './components/Map'
 import axios from 'axios'
+import escapeRegExp from "escape-string-regexp"
 
 
 class App extends Component {
 
   state = {
-    places: []
+    places: ''
+  }
+
+  mapUpdate(value) {
+    this.setState({
+      map: value
+    })
   }
 
   componentDidMount() {
@@ -42,8 +49,10 @@ class App extends Component {
     return (
       <div className="App">
         <Filter />
-        <List />
-        <Map />
+        <main>
+          <List />
+          <Map />
+        </main>
       </div>
     );
   }
