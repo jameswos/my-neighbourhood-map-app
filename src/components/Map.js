@@ -3,6 +3,10 @@ import axios from 'axios'
 
 class Map extends Component {
 
+  componentDidMount() {
+    this.loadMap();
+  }
+
   loadMap = () => {
       loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyCdU03TvjRBVim4B5U3qa95CuwbVJN4Q2E&callback=initMap");
       window.initMap = this.initMap;
