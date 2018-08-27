@@ -23,7 +23,7 @@ class App extends Component {
       .then(response => {
         this.setState({
           places: response.data.response.groups[0].items
-        }, this.loadMap())
+        })
       })
       .catch(error => {
         alert("An error occurred fetching data from Foursquare: " + error);
