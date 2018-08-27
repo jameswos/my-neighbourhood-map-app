@@ -44,8 +44,8 @@ class App extends Component {
       <div className="App">
         <Filter />
         <main>
-          <List />
-          <Map />
+          <List places={this.state.places}/>
+          <Map places={this.state.places}/>
         </main>
       </div>
     );
