@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Filter extends Component {
 
   filterUpdate() {
-    const val = this.refs.myValue.value
+    const val = this.myValue.value
     this.props.filterUpdate(val)
   }
 

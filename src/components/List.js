@@ -4,9 +4,15 @@ class List extends Component {
 
   render() {
 
-    const { places } = this.props;
+    const { places, filterText } = this.props;
 
-    const placeList = places.map(place => {
+    const placeList = places
+    /*.filter(place => {
+      // remove places that do not match current filter text
+      return place.venue.name.toLowerCase().indexOf(filterText.toLowerCase()) >= 0
+    })
+    */
+    .map(place => {
       return (
         <li key={place.venue.id}>
           <p>{place.venue.name}</p>

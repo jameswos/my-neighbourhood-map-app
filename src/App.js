@@ -49,6 +49,14 @@ class App extends Component {
   }
 
   render() {
+
+    const { places, filterText } = this.state;
+
+    const filterPlaces = places
+      .filter(place => {
+        return place.venue.name.toLowerCase().indexOf(filterText.toLowerCase()) >= 0
+      })
+
     return (
       <div className="App">
         <Filter
@@ -56,8 +64,13 @@ class App extends Component {
           filterUpdate={this.filterUpdate.bind(this)}
         />
         <main>
-          <List places={this.state.places}/>
-          <Map places={this.state.places}/>
+          <List
+            places={filterPlaces}
+            filterText={this.state.filterText}
+          />
+          <Map
+            places={filterPlaces}
+          />
         </main>
       </div>
     );
