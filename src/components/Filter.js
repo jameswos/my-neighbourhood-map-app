@@ -12,7 +12,7 @@ class Filter extends Component {
         <form>
           <input
             type='text'
-            ref="myValue"
+            ref={ (value) => { this.myValue = value } }
             placeholder='Type to filter...'
             onChange={this.filterUpdate.bind(this)}
           />

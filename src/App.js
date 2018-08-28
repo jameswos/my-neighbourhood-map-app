@@ -7,12 +7,16 @@ import axios from 'axios'
 
 class App extends Component {
 
-  state = {
-    places: []
+  constructor(props) {
+    super(props)
+    this.state = {
+      filterText: '',
+      places: []
+    }
   }
 
   componentDidMount() {
-    this.loadPlaces();
+    this.loadPlaces()
   }
 
   loadPlaces = () => {
@@ -41,7 +45,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Filter />
+        <Filter filterText={this.state.filterText} />
         <main>
           <List places={this.state.places}/>
           <Map places={this.state.places}/>
