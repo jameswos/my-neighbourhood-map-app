@@ -15,6 +15,12 @@ class App extends Component {
     }
   }
 
+  filterUpdate(value) {
+    this.setState({
+      filterText: value
+    })
+  }
+
   componentDidMount() {
     this.loadPlaces()
   }
@@ -45,7 +51,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Filter filterText={this.state.filterText} />
+        <Filter
+          filterText={this.state.filterText}
+          filterUpdate={this.filterUpdate.bind(this)}
+        />
         <main>
           <List places={this.state.places}/>
           <Map places={this.state.places}/>

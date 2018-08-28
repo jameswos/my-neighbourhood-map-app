@@ -4,6 +4,7 @@ class Filter extends Component {
 
   filterUpdate() {
     const val = this.refs.myValue.value
+    this.props.filterUpdate(val)
   }
 
   render() {
