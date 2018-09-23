@@ -4,7 +4,7 @@ class List extends Component {
 
   render() {
 
-    const { places, filterText } = this.props;
+    const { places } = this.props;
 
     const placeList = places
     /*.filter(place => {

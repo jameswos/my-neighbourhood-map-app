@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 
 class Map extends Component {
+  state = {
+    mapMarkers: []
+  }
 
   componentDidMount() {
     this.loadMap();
@@ -28,10 +31,14 @@ class Map extends Component {
           animation: window.google.maps.Animation.DROP,
           id: place.venue.id
         });
+        this.state.mapMarkers.push(marker);
       });
     }
 
   render() {
+
+    const { places } = this.props;
+
     return(
       <div id="map"></div>
     )

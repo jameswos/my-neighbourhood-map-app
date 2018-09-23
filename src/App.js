@@ -11,8 +11,7 @@ class App extends Component {
     super(props)
     this.state = {
       filterText: '',
-      places: [],
-      mapMarkers: []
+      places: []
     }
   }
 
@@ -67,11 +66,9 @@ class App extends Component {
         <main>
           <List
             places={filterPlaces}
-            filterText={this.state.filterText}
           />
           <Map
             places={filterPlaces}
-            mapMarkers={this.state.mapMarkers}
           />
         </main>
       </div>
