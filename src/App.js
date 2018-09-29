@@ -11,10 +11,12 @@ class App extends Component {
     super(props)
     this.state = {
       filterText: '',
-      places: []
+      places: [],
+      mapMarkers: []
     }
   }
 
+  // help from simonswiss: https://www.youtube.com/watch?v=A590QnMxsYM
   filterUpdate(value) {
     this.setState({
       filterText: value
@@ -48,6 +50,13 @@ class App extends Component {
       })
   }
 
+  // help from simonswiss: https://www.youtube.com/watch?v=A590QnMxsYM
+  mapMarkersUpdate(value) {
+    this.setState({
+      mapMarkers: value
+    })
+  }
+
   render() {
 
     const { places, filterText } = this.state;
@@ -69,6 +78,8 @@ class App extends Component {
           />
           <Map
             places={filterPlaces}
+            mapMarkers={this.state.mapMarkers}
+            mapMarkersUpdate={this.mapMarkersUpdate.bind(this)}
           />
         </main>
       </div>

@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 
 class Map extends Component {
   state = {
-    mapMarkers: []
+    markers: []
   }
 
   componentDidMount() {
     this.loadMap();
+    this.props.mapMarkersUpdate(this.state.markers)
   }
 
   loadMap = () => {
@@ -31,14 +32,11 @@ class Map extends Component {
           animation: window.google.maps.Animation.DROP,
           id: place.venue.id
         });
-        this.state.mapMarkers.push(marker);
+        this.state.markers.push(marker);
       });
     }
 
   render() {
-
-    const { places } = this.props;
-
     return(
       <div id="map"></div>
     )
