@@ -24,7 +24,7 @@ class Map extends Component {
         center: {lat: 52.637106, lng: -1.139771},
         zoom: 15
       });
-      this.props.places.map(place => {
+      let markers = this.props.places.forEach(place => {
         const marker = new window.google.maps.Marker({
           position: {lat: place.venue.location.lat, lng: place.venue.location.lng},
           map: map,
