@@ -6,15 +6,13 @@ class List extends Component {
 
     const { places } = this.props;
 
+
     const placeList = places
-    /*.filter(place => {
-      // remove places that do not match current filter text
-      return place.venue.name.toLowerCase().indexOf(filterText.toLowerCase()) >= 0
-    })
-    */
     .map(place => {
       return (
-        <li key={place.venue.id}>
+        <li
+          key={place.venue.id}
+        >
           <p>{place.venue.name}</p>
           <p>{place.venue.location.address}</p>
         </li>

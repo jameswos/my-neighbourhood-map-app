@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 
 class Map extends Component {
-  state = {
-    markers: []
+
+  constructor(props) {
+    super(props)
+    this.markers = [];
+    this.props.mapMarkersUpdate.bind(this);
   }
 
   componentDidMount() {
     this.loadMap();
-    this.props.mapMarkersUpdate(this.state.markers)
   }
 
   loadMap = () => {
@@ -24,7 +26,9 @@ class Map extends Component {
         center: {lat: 52.637106, lng: -1.139771},
         zoom: 15
       });
-      let markers = this.props.places.forEach(place => {
+
+      this.props.places.forEach(place => {
+        // Creates a marker for each place
         const marker = new window.google.maps.Marker({
           position: {lat: place.venue.location.lat, lng: place.venue.location.lng},
           map: map,
@@ -32,8 +36,10 @@ class Map extends Component {
           animation: window.google.maps.Animation.DROP,
           id: place.venue.id
         });
-        this.state.markers.push(marker);
+        // Pushes markers to marker array before it sends it to App state
+        this.markers.push(marker);
       });
+      this.props.mapMarkersUpdate(this.markers);
     }
 
   render() {

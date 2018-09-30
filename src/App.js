@@ -59,7 +59,7 @@ class App extends Component {
 
   render() {
 
-    const { places, filterText } = this.state;
+    const { places, filterText, mapMarkers } = this.state;
 
     const filterPlaces = places
       .filter(place => {
@@ -75,9 +75,10 @@ class App extends Component {
         <main>
           <List
             places={filterPlaces}
+            mapMarkers={mapMarkers}
           />
           <Map
-            places={filterPlaces}
+            places={places}
             mapMarkers={this.state.mapMarkers}
             mapMarkersUpdate={this.mapMarkersUpdate.bind(this)}
           />
