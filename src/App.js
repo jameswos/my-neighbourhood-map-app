@@ -16,16 +16,31 @@ class App extends Component {
     }
   }
 
-  // help from simonswiss: https://www.youtube.com/watch?v=A590QnMxsYM
-  filterUpdate(value) {
-    this.setState({
-      filterText: value
-    })
-  }
-
   componentDidMount() {
     this.loadPlaces()
   }
+
+  /* Could the CDU part help me here?
+  
+  componentDidUpdate() {
+    this.visibleMarkers()
+  }
+
+  visibleMarkers() {
+    const { mapMarkers } = this.state;
+    const { filterPlaces } = this;
+    let placesId = filterPlaces.map(place => {
+      return filterPlaces.venue.id
+    })
+    const helloMarkers = mapMarkers.some(marker => {
+      if (placesId.indexOf(marker) >= 0) {
+        marker.setVisible(true)
+      } else {
+        marker.setVisible(false)
+      }
+    })
+  }
+  */
 
   loadPlaces = () => {
     const endPoint = "https://api.foursquare.com/v2/venues/explore?";
@@ -51,6 +66,13 @@ class App extends Component {
   }
 
   // help from simonswiss: https://www.youtube.com/watch?v=A590QnMxsYM
+  filterUpdate(value) {
+    this.setState({
+      filterText: value
+    })
+  }
+
+  // help from simonswiss: https://www.youtube.com/watch?v=A590QnMxsYM
   mapMarkersUpdate(value) {
     this.setState({
       mapMarkers: value
@@ -59,6 +81,7 @@ class App extends Component {
 
   render() {
 
+
     const { places, filterText, mapMarkers } = this.state;
 
     const filterPlaces = places
@@ -66,10 +89,25 @@ class App extends Component {
         return place.venue.name.toLowerCase().indexOf(filterText.toLowerCase()) >= 0
       })
 
+    /* Set marker visibility here? Could something like this work?
+
+    const filterPlacesId = this.filterPlaces.map(place => {
+      return place.venue.id
+    });
+
+    const visibleMarkers = () => {
+      if (mapMarkers.id.some(markerId => filterPlacesId.indexOf(markerId) <= 0) {
+         markerId.setVisible(true)
+      } else {
+        markerId.setVisible(false)
+      }
+    }
+    */
+
     return (
       <div className="App">
         <Filter
-          filterText={this.state.filterText}
+          filterText={filterText}
           filterUpdate={this.filterUpdate.bind(this)}
         />
         <main>
@@ -79,7 +117,7 @@ class App extends Component {
           />
           <Map
             places={places}
-            mapMarkers={this.state.mapMarkers}
+            mapMarkers={mapMarkers}
             mapMarkersUpdate={this.mapMarkersUpdate.bind(this)}
           />
         </main>

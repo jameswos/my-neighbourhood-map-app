@@ -39,7 +39,7 @@ class Map extends Component {
         // Pushes markers to marker array before it sends it to App state
         this.markers.push(marker);
       });
-      this.props.mapMarkersUpdate(this.markers);
+      this.props.mapMarkersUpdate(this.markers)
     }
 
   render() {
