@@ -11,7 +11,9 @@ class App extends Component {
     super(props)
     this.state = {
       filterText: '',
-      places: []
+      places: [],
+      mapMarkers: [],
+      selectedItem: null
     }
   }
 
@@ -78,10 +80,15 @@ class App extends Component {
     })
   }
 
+  // help from https://stackblitz.com/edit/react-qubgz4?file=App.js
+  showInfo(e, selectedItem) {
+    this.setState({ 'selectedItem': selectedItem })
+  }
+
   render() {
 
 
-    const { places, filterText, mapMarkers } = this.state;
+    const { places, filterText, mapMarkers, selectedItem } = this.state;
 
     const filterPlaces = places
       .filter(place => {
@@ -112,10 +119,13 @@ class App extends Component {
         <main>
           <List
             places={filterPlaces}
-            mapMarkers={mapMarkers}
+            showInfo={this.showInfo.bind(this)}
           />
           <Map
             places={filterPlaces}
+            mapMarkers={mapMarkers}
+            selectedItem={selectedItem}
+            mapMarkersUpdate={this.mapMarkersUpdate.bind(this)}
           />
         </main>
       </div>

@@ -4,21 +4,40 @@ class Map extends Component {
 
   constructor(props) {
     super(props)
-    this.markers = []
-    this.map = ''
+    this.markers = [];
+    this.map = '';
+    this.infoWindow = null;
   }
 
   componentDidMount() {
     this.loadMap()
+    this.props.mapMarkersUpdate(this.markers)
   }
 
-  shouldComponentUpdate(prevProps) {
+  /*
+  shouldComponentUpdate(nextProps) {
     if (prevProps.places !== this.props.places) {
-      this.markers.forEach(marker => marker.setMap(null))
       this.createMarkers();
       return true;
     } else {
       return false;
+    }
+    if (nextProps.selectedItem !== this.props.selectedItem) {
+      let selectedMarker = this.markers.find(m => {
+        return m.id === this.props.selectedItem.venue.id;
+      });
+      this.showInfoWindow(selectedMarker);
+    }
+
+  }
+  */
+
+  componentDidUpdate(nextProps) {
+    if (nextProps.selectedItem !== this.props.selectedItem) {
+      let selectedMarker = this.markers.find(m => {
+        return m.id === this.props.selectedItem.venue.id;
+      });
+      this.showInfoWindow(selectedMarker);
     }
   }
 
@@ -37,10 +56,24 @@ class Map extends Component {
         zoom: 15
       });
       this.createMarkers()
-      console.log(this.markers)
+    }
+
+    showInfoWindow(marker) {
+      this.infoWindow.setContent(marker.title);
+      this.infoWindow.open(marker.map, marker);
+      if (marker.getAnimation() !== null) {
+        marker.setAnimation(null);
+      } else {
+        marker.setAnimation(window.google.maps.Animation.BOUNCE);
+        setTimeout(() => {
+          marker.setAnimation(null);
+        }, 750);
+      }
     }
 
     createMarkers = () => {
+      this.infoWindow = new window.google.maps.InfoWindow({});
+      let bounds = new window.google.maps.LatLngBounds();
       this.props.places.forEach(place => {
         // Creates a marker for each place
         const marker = new window.google.maps.Marker({
@@ -50,10 +83,16 @@ class Map extends Component {
           animation: window.google.maps.Animation.DROP,
           id: place.venue.id
         });
+        marker.addListener('click', () => {
+          this.showInfoWindow(marker);
+        });
+        bounds.extend(marker.getPosition());
         // Pushes markers to marker array before it sends it to App state
         this.markers.push(marker);
       });
+      this.map.fitBounds(bounds);
     }
+
 
   render() {
     return(

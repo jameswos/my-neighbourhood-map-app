@@ -14,6 +14,9 @@ class List extends Component {
           // the same id as the key? then set the visibility of the others to false to hide them?
           <li
             key={place.venue.id}
+            tabIndex={0}
+            role="button"
+            onClick={e => this.props.showInfo(e, place)}
           >
             <p>{place.venue.name}</p>
             <p>{place.venue.location.address}</p>
