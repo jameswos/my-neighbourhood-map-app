@@ -4,7 +4,7 @@ class List extends Component {
 
   render() {
 
-    const { places, mapMarkers } = this.props;
+    const { places } = this.props;
 
     const placeList = places
       .map(place => {
@@ -20,6 +20,7 @@ class List extends Component {
           </li>
         )
       })
+
 
     return(
       <div className="list">

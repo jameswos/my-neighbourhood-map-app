@@ -4,12 +4,12 @@ class Map extends Component {
 
   constructor(props) {
     super(props)
-    this.markers = [];
-    this.props.mapMarkersUpdate.bind(this);
+    this.markers = []
+    this.map = ''
   }
 
   componentDidMount() {
-    this.loadMap();
+    this.loadMap()
   }
 
   loadMap = () => {
@@ -22,16 +22,20 @@ class Map extends Component {
     }
 
     initMap = () => {
-      let map = new window.google.maps.Map(document.getElementById('map'), {
+      this.map = new window.google.maps.Map(document.getElementById('map'), {
         center: {lat: 52.637106, lng: -1.139771},
         zoom: 15
       });
+      this.createMarkers()
+      console.log(this.markers)
+    }
 
+    createMarkers = () => {
       this.props.places.forEach(place => {
         // Creates a marker for each place
         const marker = new window.google.maps.Marker({
           position: {lat: place.venue.location.lat, lng: place.venue.location.lng},
-          map: map,
+          map: this.map,
           title: place.venue.name,
           animation: window.google.maps.Animation.DROP,
           id: place.venue.id
@@ -39,7 +43,6 @@ class Map extends Component {
         // Pushes markers to marker array before it sends it to App state
         this.markers.push(marker);
       });
-      this.props.mapMarkersUpdate(this.markers)
     }
 
   render() {

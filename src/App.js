@@ -11,8 +11,7 @@ class App extends Component {
     super(props)
     this.state = {
       filterText: '',
-      places: [],
-      mapMarkers: []
+      places: []
     }
   }
 
@@ -21,7 +20,7 @@ class App extends Component {
   }
 
   /* Could the CDU part help me here?
-  
+
   componentDidUpdate() {
     this.visibleMarkers()
   }
@@ -116,9 +115,7 @@ class App extends Component {
             mapMarkers={mapMarkers}
           />
           <Map
-            places={places}
-            mapMarkers={mapMarkers}
-            mapMarkersUpdate={this.mapMarkersUpdate.bind(this)}
+            places={filterPlaces}
           />
         </main>
       </div>
