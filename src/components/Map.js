@@ -12,6 +12,16 @@ class Map extends Component {
     this.loadMap()
   }
 
+  shouldComponentUpdate(prevProps) {
+    if (prevProps.places !== this.props.places) {
+      this.markers.forEach(marker => marker.setMap(null))
+      this.createMarkers();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   loadMap = () => {
       loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyCdU03TvjRBVim4B5U3qa95CuwbVJN4Q2E&callback=initMap");
       window.initMap = this.initMap;
