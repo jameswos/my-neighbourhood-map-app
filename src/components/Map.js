@@ -15,20 +15,13 @@ class Map extends Component {
   }
 
   /*
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate(prevProps) {
     if (prevProps.places !== this.props.places) {
-      this.createMarkers();
+      this.loadMap();
       return true;
     } else {
       return false;
     }
-    if (nextProps.selectedItem !== this.props.selectedItem) {
-      let selectedMarker = this.markers.find(m => {
-        return m.id === this.props.selectedItem.venue.id;
-      });
-      this.showInfoWindow(selectedMarker);
-    }
-
   }
   */
 
@@ -55,23 +48,6 @@ class Map extends Component {
         center: {lat: 52.637106, lng: -1.139771},
         zoom: 15
       });
-      this.createMarkers()
-    }
-
-    showInfoWindow(marker) {
-      this.infoWindow.setContent(marker.title);
-      this.infoWindow.open(marker.map, marker);
-      if (marker.getAnimation() !== null) {
-        marker.setAnimation(null);
-      } else {
-        marker.setAnimation(window.google.maps.Animation.BOUNCE);
-        setTimeout(() => {
-          marker.setAnimation(null);
-        }, 750);
-      }
-    }
-
-    createMarkers = () => {
       this.infoWindow = new window.google.maps.InfoWindow({});
       let bounds = new window.google.maps.LatLngBounds();
       this.props.places.forEach(place => {
@@ -93,6 +69,18 @@ class Map extends Component {
       this.map.fitBounds(bounds);
     }
 
+    showInfoWindow(marker) {
+      this.infoWindow.setContent(marker.title);
+      this.infoWindow.open(marker.map, marker);
+      if (marker.getAnimation() !== null) {
+        marker.setAnimation(null);
+      } else {
+        marker.setAnimation(window.google.maps.Animation.BOUNCE);
+        setTimeout(() => {
+          marker.setAnimation(null);
+        }, 750);
+      }
+    }
 
   render() {
     return(
